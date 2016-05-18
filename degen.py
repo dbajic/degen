@@ -12,10 +12,10 @@ def degenerate_wrapper(i,n,k,d,V,E):
     if i == n: # Are we at the last vertex?
         V.add(n) # Add vertex to vertex set
     else:
-        d[i-1] = restricted_binomial(n-i,min(n-i,k)) # Generate degree d_i for vertex v_i
+        d[i-1] = restricted_binomial(n-i,min(n-i,k)) # Generate degree d_i for vertex v_i (!)
         degenerate_wrapper(i+1,n,k,d,V,E) # Recursively call function
         combs = []
-        for r in itertools.combinations(V,d[i-1]): # Generate all subsets of degree d_i from V
+        for r in itertools.combinations(V,d[i-1]): # Generate all subsets of degree d_i from V (!)
             combs.append(r)
         S = random.sample(combs,1)[0] # Uniformly sample one combination of edges
         E.add((i,S)) # Add corresponding edges to edge list
