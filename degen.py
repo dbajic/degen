@@ -39,20 +39,20 @@ def restricted_binomial(n,k):
     return sample
 	
 def makegraphs(num,n,k):
-		i = 0
-		while i < num:
-			graph = ""
-			E = degenerate(1,n,k)
-			# Create output file for the generated graph in an igraph-friendly format
-			for t in E:
-				A = list(zip(itertools.cycle([t[0]]),list(t[1])))
-				for k,v in A:
-					graph += str(k) + "," + str(v) + ","
-			f = open("graph" + str(i) + ".txt", "w+")
-			f.write(graph[0:-1])
-			f.close()
-			i+=1
-		return
+	i = 0
+	while i < num:
+		graph = ""
+		E = degenerate(1,n,k)
+		# Create output file for the generated graph in an igraph-friendly format
+		for t in E:
+			A = list(zip(itertools.cycle([t[0]]),list(t[1])))
+			for k,v in A:
+				graph += str(k) + "," + str(v) + ","
+		f = open("graph" + str(i) + ".txt", "w+")
+		f.write(graph[0:-1])
+		f.close()
+		i+=1
+	return
 
 # This function is solely for running on R. Functionally it is redundant to makegraphs
 def rgraph(n,k):
