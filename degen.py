@@ -59,10 +59,9 @@ def rgraph(n,k):
 	graph = ""
 	E = degenerate(1,n,k)
 	for t in E:
-				A = list(zip(itertools.cycle([t[0]]),list(t[1])))
-				for k,v in A:
-					graph += str(k) + "," + str(v) + ","
-	
+		A = list(zip(itertools.cycle([t[0]]),list(t[1])))
+		for k,v in A:
+			graph += str(k) + "," + str(v) + ","
 	return graph[0:-1]
 	
 if __name__ == "__main__":
