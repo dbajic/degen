@@ -73,7 +73,7 @@ if __name__ == "__main__":
 		elif check == "y":
 			makegraphs(int(files),int(sys.argv[1]),int(sys.argv[2]))
 	elif int(files) == 1:
-		print(rgraph(int(sys.argv[1]),int(sys.argv[2])))
+		rgraph(int(sys.argv[1]),int(sys.argv[2]))
 	else:
 		makegraphs(int(files),int(sys.argv[1]),int(sys.argv[2]))
 		
