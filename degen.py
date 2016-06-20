@@ -6,62 +6,57 @@ from scipy import stats, misc
 from time import time
 
 def degenerate(i,n,k):
-    E = degenerate_wrapper(i,n,k,[0 for w in range(n)],set(),set()) # Call wrapper function
-    return E
+	E = degenerate_wrapper(i,n,k,[0 for w in range(n)],set(),set()) # Call wrapper function
+	return E
 
 def degenerate_wrapper(i,n,k,d,V,E):
-    for w in range(i,n+1):
-        d[w-1] = restricted_binomial(n-w,min(n-w,k)) # Generate degree d_i for vertex v_i
-        if (w == n): # Are we at the last vertex?
-            V.add(n) # Add last vertex to vertex set
-    for w in range(n,i-1,-1): # "Recurse" backwards
-        counter = 0
-        temp = list(V)
-        combs = []
+	for w in range(i,n+1):
+		d[w-1] = restricted_binomial(n-w,min(n-w,k)) # Generate degree d_i for vertex v_i
+		if (w == n): # Are we at the last vertex?
+			V.add(n) # Add last vertex to vertex set
+	for w in range(n,i-1,-1): # "Recurse" backwards
+		counter = 0
+		temp = list(V) # This is OK because we're not working with huge lists
+		combs = []
 		# Uniformly choose d_i distinct numbers from the current working vertex set and use as the combination
-        while counter < d[w-1]:
-            index = int(random.uniform(1, len(temp)))
-            combs.append(temp[index-1])
-            del temp[index-1]
-            counter+=1
-        E.add((w,tuple(num for num in combs)))
-        V.add(w)
-    return E
+		while counter < d[w-1]:
+			index = int(random.uniform(1, len(temp))) # Uniformly choose a vertex from current working vertex set
+			combs.append(temp[index-1])
+			del temp[index-1] # Delete vertex we already chose to uniformly pick from remaining vertices
+			counter+=1
+		E.add((w,tuple(num for num in combs))) # Add edge to edge set
+		V.add(w) # Add vertex to vertex set
+	return E
 
 def restricted_binomial(n,k):
     probs = []
     values = np.arange(k+1)
     sum_p = sum(misc.comb(n,i) for i in range(k+1)) # Save computation time by calculating the sum ahead of time
     for v in values:
-        probs.append(misc.comb(n,v)/sum_p)
+        probs.append(misc.comb(n,v)/sum_p) # Create list of probabilities for each value
     rbin = stats.rv_discrete(name='rbin', values=(values,probs)) # Create probability density function
     sample = rbin.rvs() # Random sample from distribution
     return sample
 	
 def makegraphs(num,n,k):
-    if num == 0: # No files, just print 1 graph
-        graph = ""
-        E = degenerate(1,n,k)
-        for t in E:
-            A = list(zip(itertools.cycle([t[0]]),list(t[1])))
-            for k,v in A:
-                graph += str(k) + "," + str(v) + ","
-        print(graph[0:-1])
-    else:
-        i = 0
-        while i < num:
-            graph = ""
-            E = degenerate(1,n,k)
-            # Create output file for the generated graph in an igraph-friendly format
-            for t in E:
-                A = list(zip(itertools.cycle([t[0]]),list(t[1])))
-                for k,v in A:
-                    graph += str(k) + "," + str(v) + ","
-            f = open("graph" + str(i) + ".txt", "w+")
-            f.write(graph[0:-1])
-            f.close()
-            i+=1
-        return
+	i = -1 if num == 0 else 0 # Check to see if we want only the graph or files for graphs
+	while i < num:
+		graph = ""
+		E = degenerate(1,n,k)
+		# Create output file(s) for the generated graph in an igraph-friendly format
+		for t in E:
+			A = list(zip(itertools.cycle([t[0]]),list(t[1])))
+			for k,v in A:
+				graph += str(k) + "," + str(v) + ","
+		if num == 0: # Don't want a file, just give the graph
+			print(graph[0:-1])
+			return
+		else:
+			f = open("graph" + str(i) + ".txt", "w+")
+			f.write(graph[0:-1])
+			f.close()
+			i+=1
+	return
 	
 if __name__ == "__main__":
 	files = input("How many files do you want to generate? ")
@@ -73,5 +68,3 @@ if __name__ == "__main__":
 			makegraphs(int(files),int(sys.argv[1]),int(sys.argv[2]))
 	else:
 		makegraphs(int(files),int(sys.argv[1]),int(sys.argv[2]))
-		
-	
