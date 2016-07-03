@@ -20,7 +20,7 @@ def degenerate_wrapper(i,n,k,d,V,E):
 		combs = []
 		# Uniformly choose d_i distinct numbers from the current working vertex set and use as the combination
 		while counter < d[w-1]:
-			index = int(random.uniform(1, len(temp))) # Uniformly choose a vertex from current working vertex set
+			index = int(random.uniform(1, len(temp)+1)) # Uniformly choose a vertex from current working vertex set
 			combs.append(temp[index-1])
 			del temp[index-1] # Delete vertex we already chose to uniformly pick from remaining vertices
 			counter+=1
@@ -59,12 +59,12 @@ def makegraphs(num,n,k):
 	return
 	
 if __name__ == "__main__":
-	files = input("How many files do you want to generate? ")
+	files = int(sys.argv[3])
 	if int(files) >= 1000:
 		check = input("Are you sure you want to generate that many files? (y/n) ")
 		if check == "n":
 			sys.exit()
 		elif check == "y":
-			makegraphs(int(files),int(sys.argv[1]),int(sys.argv[2]))
+			makegraphs(files,int(sys.argv[1]),int(sys.argv[2]))
 	else:
-		makegraphs(int(files),int(sys.argv[1]),int(sys.argv[2]))
+		makegraphs(files,int(sys.argv[1]),int(sys.argv[2]))
