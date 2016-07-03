@@ -11,7 +11,7 @@ Usage
 
 For uniform graph generation with vertex and degeneracy parameters:
 
-```python degen.py vertices degeneracy```
+```python degen.py vertices degeneracy files```
 
 Contributing
 ------------
