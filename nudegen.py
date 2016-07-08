@@ -10,7 +10,7 @@ def degenerate(n,m,k):
 	C = [i for i in range(1,n)] # Set of working vertices
     
 	for i in range(1,m+1):
-		vertex = np.random.choice(C) # Uniformly choose a vertex from working set
+		vertex = C[int(random.uniform(0, len(C)))] # Uniformly choose a vertex from working set
 		d[vertex]+=1 # Increase degree of chosen vertex
 		if d[vertex] == min(n-vertex,k): # Does the degree of the chosen vertex exceed what's "allowed"
 			C.remove(vertex) # If yes, remove it from working set
