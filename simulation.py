@@ -8,8 +8,8 @@ from scipy import stats, misc
 
 def degenerate(i,n,k):
     G = nx.Graph()
-	d = [0 for a in range(n)]
-	V = set()
+    d = [0 for a in range(n)]
+    V = set()
     for w in range(i,n+1):
         d[w-1] = restricted_binomial(n-w,min(n-w,k)) # Generate degree d_i for vertex v_i
         if (w == n): # Are we at the last vertex?
