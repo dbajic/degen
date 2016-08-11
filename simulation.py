@@ -7,11 +7,9 @@ import math
 from scipy import stats, misc
 
 def degenerate(i,n,k):
-    E = degenerate_wrapper(i,n,k,[0 for w in range(n)],set()) # Call wrapper function
-    return E
-
-def degenerate_wrapper(i,n,k,d,V):
     G = nx.Graph()
+	d = [0 for a in range(n)]
+	V = set()
     for w in range(i,n+1):
         d[w-1] = restricted_binomial(n-w,min(n-w,k)) # Generate degree d_i for vertex v_i
         if (w == n): # Are we at the last vertex?
