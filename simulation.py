@@ -50,9 +50,7 @@ def simulate(n,k,sims):
         if (edges + triangles) > b: # This just assumes theta = [1,1]
             b = edges + triangles
         suff_stats.append((edges, triangles))
-    for s in suff_stats:
-        normConst += math.exp((s[0]*theta[0]+s[1]*theta[1])-b)
-    return b + math.log(normConst)
+    return b + math.log(sum(math.exp((s[0]*theta[0]+s[1]*theta[1])-b) for s in suff_stats)) # log(normConstant)
 
 if __name__ == "__main__":
     print(simulate(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3])))
