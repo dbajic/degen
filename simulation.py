@@ -39,7 +39,7 @@ def restricted_binomial(n,k):
     return sample
 
 def simulate(n,k,sims):
-    suff_stats = []
+    suff_stats = [None] * sims
     theta = [1,1] # We can make this not fixed later
     normConst = 0
     b = 0 # Max value for log-sum-exp trick
@@ -49,8 +49,8 @@ def simulate(n,k,sims):
         triangles = int(sum(nx.triangles(G).values())/3)
         if (edges + triangles) > b: # This just assumes theta = [1,1]
             b = edges + triangles
-        suff_stats.append((edges, triangles))
-    return b + math.log(sum(math.exp((s[0]*theta[0]+s[1]*theta[1])-b) for s in suff_stats)) # log(normConstant)
+        suff_stats[i] = (edges, triangles)
+    return b + math.log(sum(math.exp((s[0]*theta[0]+s[1]*theta[1])-b) for s in suff_stats))
 
 if __name__ == "__main__":
     print(simulate(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3])))
