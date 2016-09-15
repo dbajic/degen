@@ -8,7 +8,7 @@ from scipy.stats import gaussian_kde
 if __name__ == "__main__":
 	iters = range(int(sys.argv[3]))
 	print("Sampling graphs...")
-	graphs = Parallel(n_jobs=4, verbose=5)(delayed(simulation.simulate)(int(sys.argv[1]),int(sys.argv[2]),i) for i in iters)
+	graphs = Parallel(n_jobs=8, verbose=5)(delayed(simulation.simulate)(int(sys.argv[1]),int(sys.argv[2]),i) for i in iters)
 	
 	x = np.asarray([g[0] for g in graphs])
 	y = np.asarray([g[1] for g in graphs])
