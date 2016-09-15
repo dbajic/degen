@@ -17,11 +17,11 @@ For uniform graph generation with vertex and degeneracy parameters:
 
 To run a simulation:
 
-```python simulation.py [vertices] [degeneracy] [iterations]```
+```python simulation.py [vertices] [degeneracy] [samples]```
 
 To plot polytopes:
 
-```python polytopeplot.py [vertices] [degeneracy] [iterations]```
+```python polytopeplot.py [vertices] [degeneracy] [samples]```
 
 Contributing
 ------------
