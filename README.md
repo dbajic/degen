@@ -21,7 +21,7 @@ To run a simulation:
 
 To plot polytopes:
 
-```python polytopeplot.py [vertices] [degeneracy] [iterations]
+```python polytopeplot.py [vertices] [degeneracy] [iterations]```
 
 Contributing
 ------------
