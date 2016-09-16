@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from joblib import Parallel, delayed
 from scipy.stats import gaussian_kde
+from scipy.spatial import ConvexHull
 	
 if __name__ == "__main__":
 	iters = range(int(sys.argv[3]))
@@ -14,6 +15,7 @@ if __name__ == "__main__":
 	
 	x = np.asarray([g[0] for g in graphs])
 	y = np.asarray([g[1] for g in graphs])
+	points = np.column_stack([x,y])
 	
 	xy = np.vstack([x,y])
 	z = gaussian_kde(xy)(xy)
@@ -23,6 +25,9 @@ if __name__ == "__main__":
 	
 	fig, ax = plt.subplots()
 	ax.scatter(x, y, c=z, s=50, facecolors='none', edgecolor='', antialiased=True)
+	hull = ConvexHull(points)
+	plt.plot(points[hull.vertices,0], points[hull.vertices,1], 'r', lw=1)
+	plt.plot(points[hull.vertices[0],0], points[hull.vertices[0],1])
 	plt.axis([0, 40, 0, 90])
 	plt.xlabel('Edges')
 	plt.ylabel('Triangles')
