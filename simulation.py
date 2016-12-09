@@ -77,7 +77,7 @@ if __name__ == "__main__":
 	elif (len(sys.argv)) == 5:
 		iters = range(int(sys.argv[4]))
 		graphs = Parallel(n_jobs=4, verbose=5)(delayed(esimulate)(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),i) for i in iters)
-	with open('SimGraphEdgeList.csv', 'w', newline='') as cfile:
+	with open('samples.csv', 'w', newline='') as cfile:
 		cw = csv.writer(cfile, delimiter=',')
 		for g in graphs:
 			for edge in g.edges():
