@@ -15,7 +15,7 @@ To run a simulation:
 
 ```python simulation.py [vertices] [edges] [degeneracy] [samples]``` **Currently under construction**
 
-Currently supported models: ```edge, triangle, degseq, 2-star```
+Currently supported models: ```edge, triangle, degseq, star [num] (k-stars)```
 
 To plot the estimated DERGM polytope:
 
@@ -25,19 +25,19 @@ Monte Carlo MLE and Entropy plots can be found running ```dergminfo.R```
 
 **Example:**
 
-```python simulation.py 3 2 10 edge triangle 2-star degseq```
+```python simulation.py 10 6 10 edge triangle star 3 degseq```
 ```
-Models: ['Edge', 'Triangle', 'Degree Sequence', '2-star']
-0       0       0,0,0   0
-3       1       2,2,2   3
-1       0       0,1,1   0
-2       0       1,2,1   1
-2       0       2,1,1   1
-1       0       0,1,1   0
-3       1       2,2,2   3
-2       0       2,1,1   1
-2       0       2,1,1   1
-2       0       1,1,2   1
+Models: ['Edge', 'Triangle', 'Degree Sequence', '3-star']
+18      4       2,4,5,4,4,3,3,3,5,3     36
+15      3       3,4,3,2,4,1,2,3,6,2     31
+19      9       2,4,4,4,3,2,6,3,3,7     70
+21      10      3,7,6,3,3,5,4,5,2,4     86
+25      18      6,4,5,6,5,6,2,4,6,6     128
+24      16      6,3,6,4,5,5,4,3,7,5     115
+17      4       3,3,3,4,2,6,3,2,3,5     39
+22      14      4,2,4,6,6,5,5,4,2,6     92
+23      14      5,4,6,6,2,3,4,7,4,5     108
+25      19      4,6,6,5,5,4,7,7,3,3     140
 ```
 
 Contributing
